@@ -1,0 +1,67 @@
+.main {
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100%/3 - 2px);
+    height: calc(100%/3 - 2px);
+}
+
+.cell[id='1'], .cell[id='4'], .cell[id='7'], .cell[id='2'], .cell[id='5'], .cell[id='8'] {
+    border-right: 2px solid rgb(243, 205, 116);
+}
+
+.cell[id='1'], .cell[id='2'], .cell[id='3'], .cell[id='4'], .cell[id='5'], .cell[id='6'] {
+    border-bottom: 2px solid rgb(243, 205, 116);
+}
+
+.slow {
+    transition-delay: 2s;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 70px;
+}
+
+button.primary {
+    font-size: 24px;
+    cursor: pointer;
+    width: 350px;
+    height: 40px;
+    color: rgb(85, 18, 129);
+    background-color: rgb(31, 205, 221);
+    border-radius: 10px;
+}
+
+button.primary:hover {
+    color: rgb(31, 205, 221);
+    background-color: rgb(85, 18, 129);
+}
+
+@media screen and (max-width: 768px) {
+    .main {
+        height: 300px;
+        width: 300px;
+        display: flex;
+        flex-wrap: wrap;
+        cursor: pointer;
+    }
+
+    button.primary {
+        font-size: 20px;
+        width: 80%;
+    }
+
+    .bottom {
+        width: 100%;
+        bottom: 10px;
+    }
+}
