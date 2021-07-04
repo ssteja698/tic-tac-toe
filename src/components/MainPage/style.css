@@ -50,9 +50,6 @@ button.primary:hover {
     .main {
         height: 300px;
         width: 300px;
-        display: flex;
-        flex-wrap: wrap;
-        cursor: pointer;
     }
 
     button.primary {
