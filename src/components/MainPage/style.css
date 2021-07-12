@@ -36,14 +36,27 @@ button.primary {
     cursor: pointer;
     width: 350px;
     height: 40px;
-    color: rgb(85, 18, 129);
+    color: #02021d;
     background-color: rgb(31, 205, 221);
     border-radius: 10px;
+    border: 1px solid rgb(31, 205, 221);
 }
 
 button.primary:hover {
     color: rgb(31, 205, 221);
-    background-color: rgb(85, 18, 129);
+    background-color: #02021d;
+    border: 1px solid white;
+}
+
+.playerMark {
+    font-size: 60px;
+}
+
+.giveChoice {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    align-items: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -61,4 +74,8 @@ button.primary:hover {
         width: 100%;
         bottom: 10px;
     }
+
+    .playerMark {
+        font-size: 40px;
+    }    
 }
