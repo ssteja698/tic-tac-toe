@@ -147,82 +147,70 @@ const TicTacToe = () => {
 
     function minimax(board, depth, isMax) {
         let score = evaluate(board);
-    
-        if (score === 10)
+
+        if (score === 10 || score === -10) {
             return score;
-    
-        if (score === -10)
-            return score;
-    
-        if (isMovesLeft(board) === false)
+        }
+
+        if (!isMovesLeft(board)) {
             return 0;
-    
+        }
+
         if (isMax) {
             let best = -1000;
-    
-            for(let i = 0; i < 3; i++) {
-                for(let j = 0; j < 3; j++) {
-                    
-                    if (board[i][j]==='_') {
-                        
-                        board[i][j] = player;
-    
-                        best = Math.max(best, minimax(board,
-                                        depth + 1, !isMax));
-    
-                        board[i][j] = '_';
-                    }
-                }
-            }
-            return best;
-        }
-    
-        else {
-            let best = 1000;
-    
-            for(let i = 0; i < 3; i++) {
-                for(let j = 0; j < 3; j++) {
-                    
+
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
                     if (board[i][j] === '_') {
-                        
-                        board[i][j] = opponent;
-    
-                        best = Math.min(best, minimax(board,
-                                        depth + 1, !isMax));
-    
+                        board[i][j] = player;
+                        best = Math.max(best, minimax(board, depth + 1, !isMax));
                         board[i][j] = '_';
                     }
                 }
             }
-            return best;
+
+            return best - depth;
+        } else {
+            let best = 1000;
+
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    if (board[i][j] === '_') {
+                        board[i][j] = opponent;
+                        best = Math.min(best, minimax(board, depth + 1, !isMax));
+                        board[i][j] = '_';
+                    }
+                }
+            }
+
+            return best + depth;
         }
     }
-    
+
     function findBestMove(board) {
         let bestVal = -1000;
         let bestMove = new Move();
         bestMove.row = -1;
         bestMove.col = -1;
-    
-        for(let i = 0; i < 3; i++) {
-            for(let j = 0; j < 3; j++) {
-                
+
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
                 if (board[i][j] === '_') {
                     board[i][j] = player;
-    
-                    let moveVal = minimax(board, 0, false);
-    
-                    board[i][j] = '_';
-    
-                    if (moveVal > bestVal) {
+
+                    let val = minimax(board, 0, false);
+
+                    if (val > bestVal) {
+                        bestVal = val;
                         bestMove.row = i;
                         bestMove.col = j;
-                        bestVal = moveVal;
                     }
+
+                    board[i][j] = '_';
                 }
             }
         }
-    
+
         return bestMove;
     }
 
@@ -238,7 +226,7 @@ const TicTacToe = () => {
                 )}
                 <div className="main">
                     {names.map((item) => (
-                        <div id={item} className="cell playerMark" onClick={changeTurn}>
+                        <div key={item} id={item} className="cell playerMark" onClick={changeTurn}>
                             {playerOneSelected.includes(`${item}`) && <div>X</div>}
                             {playerTwoSelected.includes(`${item}`) && <div>O</div>}
                         </div>
